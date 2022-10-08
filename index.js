@@ -23,7 +23,7 @@ const db = mysql.createConnection(
 }
 init();
 
- function allDepartments(){
+ function viewDepartments(){
     const sql  = "SELECT * FROM department"
     db.query(sql, function (err, results) {
         if (err) {
@@ -34,7 +34,8 @@ init();
         })
 
     // SELECT * FROM departments
- }
+ };
+ viewDepartments();
 
  function addDepartments(){
     inquirer.prompt(
@@ -56,4 +57,48 @@ init();
         
         })
     })
-}
+};
+
+function viewRoles(){
+    const sql = "SELCET * FROM roles";
+    db.query(sql, function (err, results) {
+        if (err) {
+            console.log(err);
+          }
+          console.log(results);
+        
+        })
+};
+
+function viewEmpolyees(){
+    const sql = "SELECT * FROM empolyees";
+    db.query(sql, function (err, results) {
+        if (err) {
+            console.log(err);
+          }
+          console.log(results);
+        
+        })
+};
+
+function addRole(){
+    inquirer.prompt(
+        {
+            type:"input",
+            message: "Please name the role to be added.",
+            name: "RoleName"
+        } 
+    ) .then((response) =>{
+    console.log(response)
+ 
+
+    const sql = "INSERT INTO roles (title) VALUES (?)"
+    db.query(sql, params, (err, results) => {
+        if (err) {
+            console.log(err);
+          }
+          console.log(results);
+        
+        })
+    })
+};
