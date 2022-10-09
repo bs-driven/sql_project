@@ -58,6 +58,7 @@ init();
         })
     })
 };
+addDepartments();
 
 function viewRoles(){
     const sql = "SELCET * FROM roles";
@@ -69,6 +70,7 @@ function viewRoles(){
         
         })
 };
+viewRoles();
 
 function viewEmpolyees(){
     const sql = "SELECT * FROM empolyees";
@@ -80,6 +82,7 @@ function viewEmpolyees(){
         
         })
 };
+viewEmpolyees();
 
 function addRole(){
     inquirer.prompt(
@@ -102,6 +105,7 @@ function addRole(){
         })
     })
 };
+addRole();
 
 function addEmpolyees(){
     inquirer.prompt(
@@ -139,3 +143,4 @@ function addEmpolyees(){
             })
         });
 };
+addEmpolyees();
