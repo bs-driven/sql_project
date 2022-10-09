@@ -102,3 +102,40 @@ function addRole(){
         })
     })
 };
+
+function addEmpolyees(){
+    inquirer.prompt(
+        {
+            type:"input",
+            message: "Please enter the empolyees first name.",
+            name: "EmpolyeeFirstName"
+        } 
+    ) .then((response) =>{
+    console.log(response)
+
+    const sql = "INSERT INTO empolyees (first_name) VALUES (?)"
+    db.query(sql, params, (err, results) => {
+        if (err) {
+            console.log(err);
+          }
+          console.log(results);
+        })
+    });
+    inquirer.prompt(
+        {
+            type:"input",
+            message:"Please enter the empolyees last name",
+            name: "EmpolyeeLastNAme"
+        }
+    )  .then((response) =>{
+        console.log(response)
+        
+        const sql = "INSERT INTO empolyees (last_name) VALUE (?)"
+        db.query(sql, params, (err, results) => {
+            if (err) {
+                console.log(err);
+                }
+                console.log(results);
+            })
+        });
+};
