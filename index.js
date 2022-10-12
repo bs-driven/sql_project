@@ -33,11 +33,30 @@ init();
         
         })
 
-    // SELECT * FROM departments
  };
- viewDepartments();
 
- function addDepartments(){
+function viewRoles(){
+    const sql = "SELCET * FROM roles";
+    db.query(sql, function (err, results) {
+        if (err) {
+            console.log(err);
+          }
+          console.log(results);
+        })
+};
+
+
+function viewEmpolyees(){
+    const sql = "SELECT * FROM empolyees";
+    db.query(sql, function (err, results) {
+        if (err) {
+            console.log(err);
+          }
+          console.log(results);
+        })
+};
+
+function addDepartments(){
     inquirer.prompt(
         {
             type:"input",
@@ -47,42 +66,16 @@ init();
     ) .then((response) =>{
     console.log(response)
  
-
     const sql = "INSERT INTO department (dep_name) VALUES (?)"
     db.query(sql, params, (err, results) => {
         if (err) {
             console.log(err);
           }
           console.log(results);
-        
         })
     })
 };
-addDepartments();
 
-function viewRoles(){
-    const sql = "SELCET * FROM roles";
-    db.query(sql, function (err, results) {
-        if (err) {
-            console.log(err);
-          }
-          console.log(results);
-        
-        })
-};
-viewRoles();
-
-function viewEmpolyees(){
-    const sql = "SELECT * FROM empolyees";
-    db.query(sql, function (err, results) {
-        if (err) {
-            console.log(err);
-          }
-          console.log(results);
-        
-        })
-};
-viewEmpolyees();
 
 function addRole(){
     inquirer.prompt(
@@ -93,7 +86,6 @@ function addRole(){
         } 
     ) .then((response) =>{
     console.log(response)
- 
 
     const sql = "INSERT INTO roles (title) VALUES (?)"
     db.query(sql, params, (err, results) => {
@@ -105,14 +97,14 @@ function addRole(){
         })
     })
 };
-addRole();
+
 
 function addEmpolyees(){
     inquirer.prompt(
         {
             type:"input",
             message: "Please enter the empolyees first name.",
-            name: "EmpolyeeFirstName"
+            name: "firstName"
         } 
     ) .then((response) =>{
     console.log(response)
@@ -125,11 +117,12 @@ function addEmpolyees(){
           console.log(results);
         })
     });
+
     inquirer.prompt(
         {
             type:"input",
             message:"Please enter the empolyees last name",
-            name: "EmpolyeeLastNAme"
+            name: "lastName"
         }
     )  .then((response) =>{
         console.log(response)
@@ -143,4 +136,3 @@ function addEmpolyees(){
             })
         });
 };
-addEmpolyees();
