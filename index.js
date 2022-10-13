@@ -17,9 +17,40 @@ const db = mysql.createConnection(
         message: 'What are you looking to do today?',
         name: 'startQuestion',
         choices: ["view all departments", "view all roles","view all employees", "add a department", "add a role", "add an employee", "update an employee role"]
-        }) .then((response) =>
+        }) .then((response) =>{
+        // determine which choice was selected, response.choice
+        let choice = response.choice
+        // use a switch statement where we can evaulate the selected choice and run the corresponding function. EX: for 'View all departments' run the function viewDepartments 
         console.log(response)
-      );
+
+        switch(choices){
+            case "view all departments":
+                viewDepartments();
+                break;
+
+            case "view all roles":
+                viewRoles();
+                break;
+
+            case "view all employees":
+                viewEmpolyees();
+                break;
+            case "add a department":
+                addDepartments();
+                break;
+            case "add a role":
+                addRole();
+                break;
+            case "add an employee":
+                addEmpolyees();
+                break;
+            case "update an employee role":
+
+                //add function to run
+                //break;
+        }
+    }
+    );
 }
 init();
 
@@ -29,19 +60,19 @@ init();
         if (err) {
             console.log(err);
           }
-          console.log(results);
+          console.table(results);
         
         })
 
  };
 
 function viewRoles(){
-    const sql = "SELCET * FROM roles";
+    const sql = "SELECT * FROM roles";
     db.query(sql, function (err, results) {
         if (err) {
             console.log(err);
           }
-          console.log(results);
+          console.table(results);
         })
 };
 
@@ -52,7 +83,7 @@ function viewEmpolyees(){
         if (err) {
             console.log(err);
           }
-          console.log(results);
+          console.table(results);
         })
 };
 
@@ -71,7 +102,7 @@ function addDepartments(){
         if (err) {
             console.log(err);
           }
-          console.log(results);
+          console.table(results);
         })
     })
 };
@@ -99,7 +130,7 @@ function addRole(){
 };
 
 
-function addEmpolyees(){
+function addEmpolyees() {
     inquirer.prompt(
         {
             type:"input",
@@ -114,7 +145,7 @@ function addEmpolyees(){
         if (err) {
             console.log(err);
           }
-          console.log(results);
+          console.table(results);
         })
     });
 
@@ -132,7 +163,31 @@ function addEmpolyees(){
             if (err) {
                 console.log(err);
                 }
-                console.log(results);
+                console.table(results);
             })
         });
 };
+
+function updateEmployee() {
+    inquirer.prompt(
+        {
+            type: "input",
+            message: "Please enter the empolyee id",
+            name: "updateIdnumber"
+        } . then((response) =>{
+            console.log(response)
+            // columns = the columns you wnat to update,
+            // ex: UPDATE book SET title = 'Book Title' WHERE title = "original title"
+            // UPDATE employee SET columns = values WHERE condition
+            const sql = "UPDATE employee SET "
+            db.query(sql, param, (err,results) =>{
+                if (err) {
+                    console.log(err);
+                }
+                console.log(results);
+            });
+                
+            })
+    )
+
+}
