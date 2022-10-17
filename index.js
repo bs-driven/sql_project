@@ -1,22 +1,22 @@
 const inquirer = require("inquirer");
 const mysql = require('mysql2');
 
-const db = mysql.createConnection(
-    {
-      host: 'localhost',
-      user: 'root',
-      password: 'S9890$amuel32',
-      database: 'store_db'
-    },
-    console.log(`Connected to the movies_db database.`)
-  );
+// const db = mysql.createConnection(
+//     {
+//       host: 'localhost',
+//       user: 'root',
+//       password: 'S9890$amuel32',
+//       database: 'store_db'
+//     },
+//     console.log(`Connected to the movies_db database.`)
+//   );
 
   function init(){
     inquirer.prompt(
         { type: 'list',
         message: 'What are you looking to do today?',
         name: 'startQuestion',
-        choices: ["view all departments", "view all roles","view all employees", "add a department", "add a role", "add an employee", "update an employee role"]
+        choices: ["view all departments", "view all roles","view all employees", "add a department", "add a role", "add an employee", "update an employee role", "Quit"]
         }) .then((response) =>{
         // determine which choice was selected, response.choice
         let choice = response.choice
@@ -45,12 +45,15 @@ const db = mysql.createConnection(
                 addEmpolyees();
                 break;
             case "update an employee role":
-
+                updateEmployee();
+                break;
+            case "Quit":
+                quit();
+                break;
                 //add function to run
                 //break;
         }
-    }
-    );
+    });
 }
 init();
 
@@ -191,3 +194,8 @@ function updateEmployee() {
     )
 
 }
+
+function quit() {
+    console.log("Goodbye!");
+    process.exit();
+  }
