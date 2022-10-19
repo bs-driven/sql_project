@@ -17,13 +17,13 @@ VALUES
 (307, "Customer_rep", 48000, 004),
 (308, "Frontend_developer", 75000, 005);
 
-INSERT INTO empolyees( first_name, last_name, role_id)
+INSERT INTO empolyees( first_name, last_name, role_id, manager)
 VALUES
-("Luffy","Pirate King", 301),
-("Zoro", "Master Swordsman", 305),
-("Franky","Cyborg", 303),
-("Gon", "Freaks", 307),
-("Goku","UI", 304),
-("Vegeta", "SayianPrince",302),
-("Killua","Zultic", 308),
-("Sanji","Blackleg", 306);
+("Luffy","Pirate King", 301, true),
+("Zoro", "Master Swordsman", 305, false),
+("Franky","Cyborg", 303, false),
+("Gon", "Freaks", 307, false),
+("Goku","UI", 304, false),
+("Vegeta", "SayianPrince",302, true),
+("Killua","Zultic", 308, false),
+("Sanji","Blackleg", 306, false);

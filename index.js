@@ -204,20 +204,26 @@ function updateEmployee() {
             typee:'input',
             message:'Please enter the new role_id',
             name: 'NewRoleId'
-        } ]). then((response) =>{
+        },
+        {
+            type: 'confirm',
+            message: 'Please enter Y for yes N for no if this person is now a manager',
+            name: 'ManagerValue'
+        }
+    ]). then((response) =>{
             console.log(response)
             // columns = the columns you wnat to update,
             // ex: UPDATE book SET title = 'Book Title' WHERE title = "original title"
             // UPDATE employee SET columns = values WHERE condition
-            const sql = "UPDATE employee SET role_id = ? Where id = ?"
+            const sql = "UPDATE employee SET (role_id, manager) = (?,?) Where id = ?";
+            const param = (response.NewRoleId, response.ManagerValue)
             db.query(sql, param, (err,results) =>{
                 if (err) {
                     console.log(err);
                 }
                 console.log(results);
-            });
-                
-            });
+            }); 
+            })
 
 }
 
