@@ -9,3 +9,4 @@ Well the problem i'm having i wish i could tell you for some I apparently have s
  I'm not how to pout what I learned into words this project.There is link pages diving into ingquirer,propmt use of a switch statement matching the inquirer.propmt types to match the schema.sql
 ## Stand Out
  What makes this project stand out it displays the of requires, inquirer, db.query's. This project can be used by a a store to add departments,roles, and employees. This app can be used to update the list of employees someone may have in this table
+[A iamge of what can be seen when working](./images/Screenshot.sql.png)
