@@ -11,11 +11,8 @@ const db = require('./connection');
         name: 'startQuestion',
         choices: ["view all departments", "view all roles","view all employees", "add a department", "add a role", "add an employee", "update an employee role", "Quit"]
         }) .then((response) =>{
-        // determine which choice was selected, response.choice
         let choices = response.startQuestion
-        // use a switch statement where we can evaulate the selected choice and run the corresponding function. EX: for 'View all departments' run the function viewDepartments 
-        console.log(response)
-
+         // use a switch statement to pick the appropiate fuction for the user selction
         switch(choices){
             case "view all departments":
                 viewDepartments();
@@ -43,13 +40,11 @@ const db = require('./connection');
             case "Quit":
                 quit();
                 break;
-                //add function to run
-                //break;
         }
     });
 }
 init();
-
+// too look at all the departments within the store
  function viewDepartments(){
     const sql  = "SELECT * FROM department"
     db.query(sql, function (err, results) {
@@ -61,7 +56,7 @@ init();
         })
 
  };
-
+// too look at all the roles possible
 function viewRoles(){
     const sql = "SELECT * FROM roles";
     db.query(sql, function (err, results) {
@@ -73,7 +68,7 @@ function viewRoles(){
         })
 };
 
-
+// too look at all the employees
 function viewEmpolyees(){
     const sql = "SELECT * FROM empolyees";
     db.query(sql, function (err, results) {
@@ -84,7 +79,7 @@ function viewEmpolyees(){
           returnMenu();
         })
 };
-
+// add a department to the table
 function addDepartments(){
     inquirer.prompt(
         {
@@ -106,7 +101,7 @@ function addDepartments(){
     })
 };
 
-
+// to add a role to the table
 function addRole(){
     inquirer.prompt(
        [ {
@@ -125,7 +120,6 @@ function addRole(){
             name: 'RoleDepartment'
         }]
     ) .then((response) =>{
-    console.log(response)
 
     const sql = "INSERT INTO roles (title,salary, department_id) VALUES (?,?,?)"
     const params = [response.RoleName, response.RoleSalary, response.RoleDepartment]
@@ -133,14 +127,14 @@ function addRole(){
         if (err) {
             console.log(err);
           }
-          console.log(results);
+          console.table(results);
           returnMenu();
         
         })
     })
 };
 
-
+// too add a employee
 function addEmpolyees() {
     inquirer.prompt(
         [{
@@ -161,7 +155,6 @@ function addEmpolyees() {
         }
     ]
     ) .then((response) =>{
-    console.log(response)
 
     const sql = "INSERT INTO empolyees (first_name, last_name, role_id) VALUES (?,?,?)"
     const params = [response.firstName, response.lastName, response.employeeRoleId]
@@ -174,34 +167,17 @@ function addEmpolyees() {
         })
     });
 
-//     inquirer.prompt(
-//         {
-//             type:"input",
-//             message:"Please enter the empolyees last name",
-//             name: "lastName"
-//         }
-//     )  .then((response) =>{
-//         console.log(response)
-        
-//         const sql = "INSERT INTO empolyees (last_name) VALUE (?)"
-//         db.query(sql, params, (err, results) => {
-//             if (err) {
-//                 console.log(err);
-//                 }
-//                 console.table(results);
-//             })
-//         });
 };
-
+// update a employees 
 function updateEmployee() {
     inquirer.prompt(
         [{
-            type: "input",
-            message: "Please enter the empolyee id",
+            type: "number",
+            message: "Please enter the employee id",
             name: "updateIdnumber"
         },
         {
-            typee:'input',
+            type:'number',
             message:'Please enter the new role_id',
             name: 'NewRoleId'
         },
@@ -211,17 +187,13 @@ function updateEmployee() {
             name: 'ManagerValue'
         }
     ]). then((response) =>{
-            console.log(response)
-            // columns = the columns you wnat to update,
-            // ex: UPDATE book SET title = 'Book Title' WHERE title = "original title"
-            // UPDATE employee SET columns = values WHERE condition
-            const sql = "UPDATE employee SET (role_id, manager) = (?,?) Where id = ?";
-            const param = (response.NewRoleId, response.ManagerValue)
+            const sql = "UPDATE empolyees SET role_id = ?, manager = ? WHERE id = ?;";
+            const param = [response.NewRoleId, response.ManagerValue, response.updateIdnumber]
             db.query(sql, param, (err,results) =>{
                 if (err) {
                     console.log(err);
                 }
-                console.log(results);
+                viewEmpolyees();
             }); 
             })
 
