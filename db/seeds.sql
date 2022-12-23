@@ -1,3 +1,5 @@
+USE stores_db;
+
 INSERT INTO department( id, dep_name)
 VALUES
 (001,"Mangemenent"),

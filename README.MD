@@ -10,3 +10,5 @@ Well the problem i'm having i wish i could tell you for some I apparently have s
 ## Stand Out
  What makes this project stand out it displays the of requires, inquirer, db.query's. This project can be used by a a store to add departments,roles, and employees. This app can be used to update the list of employees someone may have in this table
 [A iamge of what can be seen when working](./images/Screenshot.sql.png)
+ 
+ https://watch.screencastify.com/v/bxuNejpFP2PD2ueKvwFN This link is rto a video of the application being used and each of the functions

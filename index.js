@@ -2,7 +2,10 @@ const inquirer = require("inquirer");
 const mysql = require('mysql2');
 const db = require('./connection');
 
-
+db.connect(function (err) {
+  if (err) throw err;
+  init();
+});
 
   function init(){
     inquirer.prompt(
@@ -43,7 +46,7 @@ const db = require('./connection');
         }
     });
 }
-init();
+
 // too look at all the departments within the store
  function viewDepartments(){
     const sql  = "SELECT * FROM department"
@@ -91,6 +94,8 @@ function addDepartments(){
     console.log(response)
  
     const sql = "INSERT INTO department (dep_name) VALUES (?)"
+    const params = [response.DepartmentName]
+
     db.query(sql, params, (err, results) => {
         if (err) {
             console.log(err);
@@ -164,6 +169,7 @@ function addEmpolyees() {
             console.log(err);
           }
           console.table(results);
+          returnMenu();
         })
     });
 
@@ -187,7 +193,7 @@ function updateEmployee() {
             name: 'ManagerValue'
         }
     ]). then((response) =>{
-            const sql = "UPDATE empolyees SET role_id = ?, manager = ? WHERE id = ?;";
+            const sql = "UPDATE empolyees SET role_id = ?, manager = ? WHERE id = ?"
             const param = [response.NewRoleId, response.ManagerValue, response.updateIdnumber]
             db.query(sql, param, (err,results) =>{
                 if (err) {
@@ -203,6 +209,7 @@ function quit() {
     console.log("Goodbye!");
     process.exit();
   };
+
   function returnMenu() {
     setTimeout(() => {
         init()        
